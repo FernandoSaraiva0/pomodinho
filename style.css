@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Aumentar o tamanho e configurar fone do input */
+input{
+    width: 150px !important;
+    height: 150px !important;
+    font-size: 2em !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+/* Remover setas do Type Number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin:0;
+}
+button{
+    width: 100% !important;
+}
+
+/* Estilizando o timer */
+.time{
+    color: #fff;
+    text-align: center;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    font-size: 4em;
+}
