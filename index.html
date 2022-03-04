@@ -29,12 +29,12 @@
     <nav class="navbar navbar-expand-sm|md|lg|-xl navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand fw-bold" href="index.html">Pomodinho</a>
-        <div class="me-3">
-          <a>
-            <i id="pause" class="bi bi-pause" style="display:none;" aria-hidden="true"></i>
+        <div class="me-3 audio bg-success d-flex justify-content-center align-items-center">
+          <a onclick="parar()">
+            <i id="pause"  class="bi bi-pause" style="display: none;"aria-hidden="true"></i>
           </a>
 
-          <a>
+          <a onclick="tocar()">
             <i id="play" class="bi bi-play" aria-hidden="true"></i>
           </a>
 
@@ -112,13 +112,13 @@
       <!-- /Config -->
 
       <!-- Timer -->
-      <div id="timer" class="d-flex mt-0 justify-content-center" style="display: none;">
+      <div id="timer" class="d-flex mt-0 justify-content-center">
         <div class="row mb-3">
             <div class="col">
                 <h3 id='title' class="text-center"></h3>
             </div>
 
-            <div class="row shadow time" style="display:none;">
+            <div class="row shadow time">
                 <div class="col-5 p-0">
                     <h2 id="minutes"></h2>
                 </div>
@@ -131,7 +131,7 @@
             </div>
 
             <div class="col">
-                <h3 id='title_sesction' class="text-center text-secondary"></h3>
+                <h3 id='title_section' class="text-center text-secondary"></h3>
             </div>
         </div>
       </div>
