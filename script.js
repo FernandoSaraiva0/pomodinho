@@ -42,9 +42,9 @@ function iniciar() {
     timer.style.setProperty("display", "block", "important");
 
     // Adicionando os valores captados na memoria do usuário
-    localStorage.setItem("acao", toString(acao.value));
-    localStorage.setItem("pausa", toString(pausa.value));
-    localStorage.setItem("sessoes", toString(sessoes.value));
+    localStorage.setItem("acao", parseInt(acao.value));
+    localStorage.setItem("pausa", parseInt(pausa.value));
+    localStorage.setItem("sessoes", parseInt(sessoes.value));
 
     momentAcao();
   }
@@ -92,10 +92,12 @@ function momentAcao(){
     title.style.fontWeight = 'bold'
     title.style.setProperty('color', '#28a745', 'important')
 
-    min = Number(localStorage.getItem('acao'))
+    min = parseInt(localStorage.getItem('acao'))
 
-    min = min -1
+    min -= 1
     segundos = 59
+
+    console.log(min)
 
     document.getElementById('minutes').innerHTML = min
     document.getElementById('seconds').innerHTML = segundos
@@ -116,6 +118,7 @@ function momentAcao(){
                 clearInterval(min_interval)
                 clearInterval(seg_interval)
 
+                // Problema ao entrar na pausa, os valores mudam, porém a função momentpausa não executa.
                 momentPausa()
             }
             segundos = 60
@@ -125,39 +128,39 @@ function momentAcao(){
 }
 function momentPausa(){
     let title = document.getElementById('title')
-    title.innerHTML = "AÇÃO"
+    title.innerHTML = "PAUSA"
     title.style.fontSize = '2rem'
     title.style.fontWeight = 'bold'
     title.style.setProperty('color', '#28a745', 'important')
 
-    min_pausa = Number(localStorage.getItem('acao'))
+    min_pausa = parseInt(localStorage.getItem('pausa'))
 
-    min_pausa = min_pausa -1
-    segundos = 59
+    min_pausa -= 1
+    segunds = 59
 
     document.getElementById('minutes').innerHTML = min_pausa
-    document.getElementById('seconds').innerHTML = segundos
+    document.getElementById('seconds').innerHTML = segunds
 
-    var min_interval = serInterval(minTimer, 60000);
-    var seg_interval = serInterval(segTimer, 1000);
+    var min_int = serInterval(minTimer, 60000);
+    var seg_int = serInterval(segTimer, 1000);
 
     function minTimer(){
-        min_pausa = min_pausa - 1 
+        min_pausa -= 1 
         document.getElementById('minutes').innerHTML = min_pausa
     }
     function segTimer(){
-        segundos = segundos - 1 
-        document.getElementById('seconds').innerHTML = segundos
+        segunds -= 1 
+        document.getElementById('seconds').innerHTML = segunds
 
-        if(segundos <=0 ){
+        if(segunds <=0 ){
             if(min_pausa <= 0){
                 // Capta a quantiade de sessoes e subtrai 1
-                ses = Number(localStorage.getItem('sessoes'))
+                ses = parseInt(localStorage.getItem('sessoes'))
                 ses = ses - 1
                 // Atualizando no local storage quantas sessões ainda restam
-                localStorage.setItem('sessoes', String(ses))
-                clearInterval(min_interval)
-                clearInterval(seg_interval)
+                localStorage.setItem('sessoes', toString(ses))
+                clearInterval(min_int)
+                clearInterval(seg_int)
                 // Se houverem acabado as sessões ele vai limpar o local storage
                 if(ses <= 0){
                     audio.pause()
@@ -172,7 +175,7 @@ function momentPausa(){
                     momentAcao()
                 }
             }
-            segundos = 60
+            segunds = 60
         }
     }
 }
