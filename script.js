@@ -123,10 +123,22 @@ function momentAcao(){
             }
             segundos = 60
         }
+
+        document.getElementsByTagName('title')[0].innerHTML = `${min} : ${segundos} - Pomodinho`
     }
 
 }
+
+// Método para entrar no tempo de pausa
 function momentPausa(){
+    
+    let sesoes_valor = localStorage.getItem('sessoes')
+    if( sesoes_valor != '1'){
+        document.getElementById('title_section').innerHTML = sesoes_valor + ' Sessões restantes'
+    } else {
+        document.getElementById('title_section').innerHTML = sesoes_valor + ' Sessão restante'
+    }
+
     let title = document.getElementById('title')
     title.innerHTML = "PAUSA"
     title.style.fontSize = '2rem'
@@ -141,8 +153,8 @@ function momentPausa(){
     document.getElementById('minutes').innerHTML = min_pausa
     document.getElementById('seconds').innerHTML = segunds
 
-    var min_int = serInterval(minTimer, 60000);
-    var seg_int = serInterval(segTimer, 1000);
+    var min_int = setInterval(minTimer, 60000);
+    var seg_int = setInterval(segTimer, 1000);
 
     function minTimer(){
         min_pausa -= 1 
@@ -151,14 +163,15 @@ function momentPausa(){
     function segTimer(){
         segunds -= 1 
         document.getElementById('seconds').innerHTML = segunds
+        timer.style.setProperty("background color", "#fff", "important")
 
         if(segunds <=0 ){
             if(min_pausa <= 0){
                 // Capta a quantiade de sessoes e subtrai 1
-                ses = parseInt(localStorage.getItem('sessoes'))
-                ses = ses - 1
+                ses = parseInt(sesoes_valor)
+                ses -= 1
                 // Atualizando no local storage quantas sessões ainda restam
-                localStorage.setItem('sessoes', toString(ses))
+                localStorage.setItem('sessoes', ses)
                 clearInterval(min_int)
                 clearInterval(seg_int)
                 // Se houverem acabado as sessões ele vai limpar o local storage
@@ -171,11 +184,13 @@ function momentPausa(){
                     config.style.setProperty("display", "none", "important");
                     timer.style.setProperty("display", "none", "important");
                     fim.style.setProperty("display", "block", "important");
+                    document.getElementsByTagName('title')[0].innerHTML = `Parabéns - Pomodinho`
                 } else {
                     momentAcao()
                 }
             }
             segunds = 60
         }
+        document.getElementsByTagName('title')[0].innerHTML = `${min_pausa} : ${segunds} - Pomodinho`
     }
 }
